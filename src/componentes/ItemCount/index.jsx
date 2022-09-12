@@ -1,10 +1,14 @@
 
 import "./styles.css"
 
+
 import React,{useState} from 'react';
 
 
-export const ItemCount =() =>{
+
+
+export const ItemCount =({initial, stock, onAdd}) =>{
+  const [count, setCount] = useState(initial);
 
   const restar = () => {
     
@@ -19,15 +23,15 @@ export const ItemCount =() =>{
 
   }
 
-  const [count, setCount] = useState(1);
+  
 
   return (
     <div className='counter'>
         <button disabled={count <= 1} onClick={restar}>-</button>
         <span>{count}</span>
-        <button disabled={count>= 5} onClick={sumar}>+</button>
+        <button disabled={count>= stock} onClick={sumar}>+</button>
         <div>
-            <button>agregar al carrito</button>
+            <button disabled={stock <= 0} onClick={() => onAdd(count)}>agregar al carrito</button>
         </div>
     </div>
   )
